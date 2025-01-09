@@ -64,7 +64,6 @@ const Sidebar = () => {
           onChange={handlePhotoUpload}
           style={{ display: "none" }}
         />
-        {!isCollapsed && <p className="profile-name">Niels van Doodewaard</p>}
       </div>
       <nav>
         <ul>

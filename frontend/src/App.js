@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Sidebar from "./components/Sidebar";
@@ -31,13 +31,16 @@ function App() {
   return (
     <Router>
       <Routes>
+        {/* Redirect de gebruiker naar de loginpagina bij het opstarten */}
+        <Route path="/" element={<Navigate to="/login" />} />
+
+        {/* Definieer andere routes */}
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/sidebar" element={<Sidebar />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/UserSidebar" element={<UserSidebar />} />
         <Route path="/UserDashboard" element={<UserDashboard />} />
-        {/* Doorgeven van onSave aan SettingsPage */}
         <Route path="/settingspage" element={<SettingsPage onSave={handleSave} />} />
         <Route path="/gebruikers" element={<Gebruikers />} />
         <Route path="/beheer" element={<Beheer />} />
