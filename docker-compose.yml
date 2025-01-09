@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  # Backend service (Strapi)
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "1337:1337"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./backend:/app
+    networks:
+      - app-network
+
+  # Frontend service (React)
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./frontend:/app
+    networks:
+      - app-network
+    depends_on:
+      - backend
+
+  # Database service (SQLite)
+  database:
+    image: nouchka/sqlite3
+    container_name: sqlite-database
+    volumes:
+      - ./data:/data
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

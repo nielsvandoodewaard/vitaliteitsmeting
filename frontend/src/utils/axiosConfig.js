@@ -4,7 +4,7 @@ import axios from "axios";
 
 // Basis configuratie voor axios
 const api = axios.create({
-  baseURL: "http://localhost:1337",  // Vervang dit door je Strapi API URL
+  baseURL: "http://backend:1337",  // Vervang dit door je Strapi API URL
   headers: {
     "Content-Type": "application/json",
   },
