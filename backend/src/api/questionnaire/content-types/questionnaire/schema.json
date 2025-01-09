@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "questionnaires",
+  "info": {
+    "singularName": "questionnaire",
+    "pluralName": "questionnaires",
+    "displayName": "questionnaire"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "titel": {
+      "type": "text"
+    },
+    "beschrijving": {
+      "type": "text"
+    },
+    "questions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::question.question",
+      "mappedBy": "questionnaire"
+    }
+  }
+}

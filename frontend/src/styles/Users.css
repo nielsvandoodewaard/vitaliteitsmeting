@@ -1,0 +1,59 @@
+  /* Witte kaart-stijl */
+  .users-container {
+    background-color: white; /* Witte achtergrondkleur */
+    border-radius: 20px; /* Meer afgeronde hoeken */
+    width: 80%; /* 80% van de breedte */
+    max-width: 900px; /* Limiteer de maximale breedte */
+    height: auto; /* Past zich aan de inhoud aan */
+    padding: 30px 40px; /* Comfortabele binnenruimte */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15); /* Donkere schaduw voor 3D-effect */
+    animation: zoomIn 0.3s ease-in-out; /* Lichte zoom-in animatie */
+  }
+  
+  /* Titel stijl */
+  .users-container h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Paragraaf stijl */
+  .users-container p {
+    font-size: 18px;
+    font-weight: 500;
+    color: #555;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  /* Animatie voor zoom-in effect */
+  @keyframes zoomIn {
+    from {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  /* Responsieve instellingen */
+  @media (max-width: 768px) {
+    .users-container {
+      width: 100%;
+      padding: 20px;
+    }
+  
+    .users-container h2 {
+      font-size: 24px;
+    }
+  
+    .users-container p {
+      font-size: 16px;
+    }
+  }
+  
+  

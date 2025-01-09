@@ -1,0 +1,39 @@
+.survey-page {
+    display: flex;
+  }
+  
+  .survey-container {
+    flex: 1;
+    padding: 20px;
+    background: #f9f9f9;
+  }
+  
+  .survey-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .survey-selection {
+    margin-bottom: 20px;
+  }
+  
+  .survey-selection label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  .survey-selection select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .survey-display {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background: #fff;
+  }
+  

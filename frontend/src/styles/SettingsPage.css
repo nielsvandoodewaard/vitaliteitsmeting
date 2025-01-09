@@ -1,0 +1,83 @@
+.settings-header {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.settings-header h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.settings-header p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.settings-content {
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+}
+
+.settings-section {
+  margin-bottom: 40px;
+}
+
+.settings-section h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+.save-btn {
+  padding: 12px 24px;
+  background-color: #007bff;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 200px;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+
+.save-btn:hover {
+  background-color: #0056b3;
+}

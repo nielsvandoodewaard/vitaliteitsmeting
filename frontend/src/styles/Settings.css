@@ -1,0 +1,48 @@
+.settings {
+    padding: 20px;
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 20px auto;
+  }
+  
+  .settings h2 {
+    text-align: center;
+    font-size: 24px;
+    color: var(--text-color-light);
+  }
+  
+  .settings p {
+    text-align: center;
+    font-size: 16px;
+    color: var(--text-color-light);
+  }
+  
+  .setting-item {
+    margin: 15px 0;
+  }
+  
+  .setting-item label {
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+    color: var(--text-color-light);
+  }
+  
+  .setting-item select {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 300px;
+    margin-top: 5px;
+    display: block;
+  }
+  
+  .setting-item select:focus {
+    border-color: #1CB4BC;
+  }
+  

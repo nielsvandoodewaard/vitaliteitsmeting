@@ -1,0 +1,93 @@
+/* Algemene stijlen voor de formuliercontainer */
+.questionnaire-manager {
+    padding: 40px; /* Extra ruimte rond de container */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Standaard breedte is 100% van het scherm */
+    height: auto; /* Zorgt ervoor dat de hoogte zich aanpast aan de inhoud */
+    margin: 30px; /* 16px afstand van boven en onder de container */
+    text-align: center;
+    box-sizing: border-box; /* Padding wordt meegeteld bij de breedte en hoogte */
+    max-width: 100%; /* Zorg ervoor dat de container 100% van het beschikbare scherm gebruikt */
+    padding-top: 16px; /* Zorg ervoor dat de bovenkant 16px ruimte heeft */
+    padding-bottom: 16px; /* Zorg ervoor dat de onderkant 16px ruimte heeft */
+  }
+  
+  /* Bij grotere schermen (>1084px), schaling toepassen */
+  @media (min-width: 1084px) {
+    .questionnaire-manager {
+      width: 80%; /* Breedte aanpassen naar 80% van het scherm */
+      max-width: 1500px; /* Maximaliseer de breedte tot een redelijke limiet */
+      margin-left: auto; /* Centraal uitlijnen */
+      margin-right: auto; /* Centraal uitlijnen */
+    }
+  }
+  
+  /* Stijlen voor input- en selectvelden */
+  .questionnaire-manager input,
+  .questionnaire-manager select {
+    padding: 12px; /* Meer ruimte binnen de invoervelden */
+    margin: 15px 0; /* Meer ruimte tussen de invoervelden */
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    display: block;
+    width: 100%; /* Maak de invoervelden responsief */
+    max-width: 600px; /* Beperk de breedte voor grotere schermen */
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+  }
+  
+  /* Stijlen voor de knop */
+  button {
+    padding: 12px 20px; /* Meer ruimte binnen de knop */
+    background-color: #1CB4BC;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px; /* Meer ruimte boven de knop */
+  }
+  
+  button:hover {
+    background-color: #18a8a0;
+  }
+  
+  /* Titelstijl */
+  h2 {
+    text-align: center;
+    margin-bottom: 30px; /* Meer ruimte onder de titel */
+  }
+  
+  /* Subtitelstijl */
+  h3 {
+    margin-top: 30px; /* Meer ruimte boven de subtitel */
+    text-align: center;
+  }
+  
+  /* Lijststijl */
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    margin-bottom: 20px; /* Meer ruimte tussen de lijstitems */
+  }
+  
+  /* Maak de pagina schaalbaar en reageer op grotere aantallen vragen */
+  @media (max-width: 1023px) {
+    .questionnaire-manager {
+      padding: 20px; /* Minder padding voor kleinere schermen */
+    }
+  
+    .questionnaire-manager input,
+    .questionnaire-manager select {
+      width: 100%; /* Volledige breedte voor invoervelden */
+    }
+  }
+  

@@ -1,0 +1,165 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #74ebd5, #acb6e5); /* Gradient achtergrond */
+}
+
+.login-container {
+  max-width: 500px; /* Maak het vlak breder */
+  padding: 30px;
+  background-color: #ffffff; /* Witte achtergrond */
+  border-radius: 16px; /* Ronde hoeken */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Schaduw voor diepte */
+  width: 100%;
+  animation: fadeIn 1s ease-in-out; /* Smooth animatie bij laden */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centreer inhoud binnen de container */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h2 {
+  text-align: center;
+  color: #333; /* Donkere kleur voor contrast */
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* Zorg dat het formulier de volledige breedte van de container benut */
+}
+
+form div {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+  color: #555; /* Subtiele grijstint */
+}
+
+input {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 90%; /* Maak de inputvelden iets smaller */
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  border-color: #74ebd5;
+  outline: none;
+  box-shadow: 0 0 5px rgba(116, 235, 213, 0.8);
+}
+
+button {
+  padding: 12px;
+  background-color: #74ebd5; /* Primair blauwgroen */
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 90%; /* Maak de knop even breed als de inputvelden */
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #59d6c5; /* Donkerder blauwgroen bij hover */
+  transform: scale(1.02); /* Lichte vergroting bij hover */
+}
+
+p {
+  text-align: center;
+  color: #ff4d4d; /* Opvallend rood voor foutmeldingen */
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.login-logo {
+  display: block;
+  margin: 0 auto;
+  width: 300px;  
+}
+
+.logo-container {
+  text-align: center; /* Zorg ervoor dat het logo gecentreerd is */
+  margin-bottom: 10px; /* Eventueel wat ruimte onder het logo */
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Donkere achtergrond */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Zorg ervoor dat deze boven alles komt */
+}
+
+/* De draaiende loader */
+.loader {
+  border: 16px solid #f3f3f3; /* Grijze achtergrond voor de cirkel */
+  border-top: 16px solid #3498db; /* Blauwe top */
+  border-radius: 50%; /* Cirkelvormig */
+  width: 120px; /* Grootte van de cirkel */
+  height: 120px; /* Grootte van de cirkel */
+  animation: spin 6s linear infinite; /* Draai animatie duurt nu 6 seconden */
+}
+
+/* Animerende tekst */
+.loading-text {
+  font-size: 2rem;
+  color: white;
+  font-weight: bold;
+  animation: fadeInOut 5s ease-in-out infinite;
+  position: absolute;
+  top: 10%;
+}
+
+/* Draai animatie */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Fade-in en fade-out van de tekst */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

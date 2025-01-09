@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "registrations",
+  "info": {
+    "singularName": "registration",
+    "pluralName": "registrations",
+    "displayName": "registration"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "username": {
+      "type": "text"
+    },
+    "email": {
+      "type": "email"
+    },
+    "password": {
+      "type": "password"
+    },
+    "gemeente": {
+      "type": "text"
+    },
+    "praktijknaam": {
+      "type": "text"
+    },
+    "voornaam": {
+      "type": "string"
+    },
+    "achternaam": {
+      "type": "text"
+    }
+  }
+}
