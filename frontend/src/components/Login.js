@@ -17,7 +17,7 @@ const Login = () => {
     // Controleer of er al een geldig JWT-token is bij het laden van de pagina
     const token = localStorage.getItem("supabase_token");
     if (token) {
-      navigate("/UserDashboard"); // Als er een token is, stuur de gebruiker naar het dashboard
+      navigate("/Login"); // Als er een token is, stuur de gebruiker naar het dashboard
     }
   }, [navigate]);
 
