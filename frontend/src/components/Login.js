@@ -52,7 +52,7 @@ const Login = () => {
       setMessage(`Welkom ${user.email}!`);
 
       // Redirect naar het dashboard
-      navigate("/dashboard");
+      navigate("/UserDashboard");
     } catch (err) {
       setMessage("Inloggen mislukt. Controleer je gegevens.");
       console.error("Login error:", err);
