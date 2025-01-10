@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { supabase } from "../supabaseClient"; // Zorg ervoor dat dit pad klopt met jouw projectstructuur
+import { supabase } from "../utils/supabaseClient"; // Zorg ervoor dat dit pad klopt met jouw projectstructuur
 import "../styles/Register.css"; // Importeer de CSS
 
 const Register = () => {
