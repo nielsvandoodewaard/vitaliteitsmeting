@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { supabase } from "../supabaseClient"; // Zorg ervoor dat dit pad klopt met jouw projectstructuur
 import "../styles/Register.css"; // Importeer de CSS
 
 const Register = () => {
@@ -7,16 +7,16 @@ const Register = () => {
     username: "",
     email: "",
     password: "",
-    passwordConfirm: "", // Voeg een wachtwoord bevestigingsveld toe
+    passwordConfirm: "",
     voornaam: "",
     achternaam: "",
-    gemeente: "", // Voeg gemeente toe
-    andereGemeente: "", // Voeg een extra veld toe voor 'Anders' gemeente
-    praktijknaam: "", // Voeg praktijknaam toe
+    gemeente: "",
+    andereGemeente: "",
+    praktijknaam: "",
   });
 
   const [errorMessage, setErrorMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false); // Lade-indicator
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,75 +24,72 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true); // Zet de laadindicator aan
+    setIsLoading(true);
 
-    // Basis validatie
+    // Validaties
     if (!formData.username || !formData.email || !formData.password || !formData.gemeente || !formData.praktijknaam) {
       setErrorMessage("Vul alle velden in.");
       setIsLoading(false);
       return;
     }
 
-    // Wachtwoordbevestiging validatie
     if (formData.password !== formData.passwordConfirm) {
       setErrorMessage("Wachtwoorden komen niet overeen.");
       setIsLoading(false);
       return;
     }
 
-    // Gemeente validatie als 'Anders' wordt gekozen
     if (formData.gemeente === "Anders" && !formData.andereGemeente) {
       setErrorMessage("Vul uw gemeente in wanneer u 'Anders' kiest.");
       setIsLoading(false);
       return;
     }
 
-    // Voeg 'Anders' gemeente toe aan het formulier
     const gemeenteToSend = formData.gemeente === "Anders" ? formData.andereGemeente : formData.gemeente;
 
     try {
-      // Verstuur het registratieverzoek naar de Strapi API (gebruik de juiste endpoint voor je configuratie)
-      const response = await axios.post(
-        "http://localhost:1337/api/registrations", // Dit is de endpoint voor de 'User' collectie
-        {
-          data: {
-            username: formData.username,
-            email: formData.email,
-            password: formData.password,
-            gemeente: gemeenteToSend, // Gemeente toevoegen aan de payload
-            praktijknaam: formData.praktijknaam, // Praktijknaam toevoegen aan de payload
-            voornaam: formData.voornaam, // Voeg voornaam toe aan de payload
-            achternaam: formData.achternaam, // Voeg achternaam toe aan de payload
-          }
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          }
-        }
-      );
+      // Maak een gebruiker aan in Supabase Authentication
+      const { data: user, error: authError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (authError) {
+        throw authError;
+      }
+
+      // Sla aanvullende gegevens op in een aparte tabel
+      const { error: dbError } = await supabase.from("users").insert({
+        username: formData.username,
+        voornaam: formData.voornaam,
+        achternaam: formData.achternaam,
+        gemeente: gemeenteToSend,
+        praktijknaam: formData.praktijknaam,
+        user_id: user?.user?.id, // Koppel de gegevens aan de aangemaakte gebruiker
+      });
+
+      if (dbError) {
+        throw dbError;
+      }
 
       alert("Registratie succesvol!");
-      console.log("Gebruiker aangemaakt:", response.data);
-
-      // Herinitialiseren van formData na succesvolle registratie
       setFormData({
         username: "",
         email: "",
         password: "",
-        passwordConfirm: "", // Herinitialiseren van wachtwoord bevestiging
+        passwordConfirm: "",
         voornaam: "",
         achternaam: "",
-        gemeente: "", // Herinitialiseren van gemeente
-        andereGemeente: "", // Herinitialiseren van andere gemeente
-        praktijknaam: "", // Herinitialiseren van praktijknaam
+        gemeente: "",
+        andereGemeente: "",
+        praktijknaam: "",
       });
-      setErrorMessage(""); // Verwijder foutmelding na succes
+      setErrorMessage("");
     } catch (error) {
-      console.error("Fout bij registratie:", error);
+      console.error("Fout bij registratie:", error.message);
       setErrorMessage("Registratie mislukt. Probeer het opnieuw.");
     } finally {
-      setIsLoading(false); // Zet de laadindicator uit
+      setIsLoading(false);
     }
   };
 
@@ -116,6 +113,7 @@ const Register = () => {
         required
       />
       <input
+        type="password"
         name="password"
         placeholder="Wachtwoord"
         value={formData.password}
@@ -123,6 +121,7 @@ const Register = () => {
         required
       />
       <input
+        type="password"
         name="passwordConfirm"
         placeholder="Bevestig wachtwoord"
         value={formData.passwordConfirm}
@@ -143,8 +142,6 @@ const Register = () => {
         value={formData.achternaam}
         onChange={handleChange}
       />
-      
-      {/* Gemeente dropdown */}
       <select
         name="gemeente"
         value={formData.gemeente}
@@ -166,8 +163,6 @@ const Register = () => {
         <option value="Zwijndrecht">Zwijndrecht</option>
         <option value="Anders">Anders, namelijk...</option>
       </select>
-
-      {/* Tekstveld voor andere gemeente, zichtbaar alleen als 'Anders' is geselecteerd */}
       {formData.gemeente === "Anders" && (
         <input
           type="text"
@@ -177,8 +172,6 @@ const Register = () => {
           onChange={handleChange}
         />
       )}
-
-      {/* Praktijknaam veld */}
       <input
         type="text"
         name="praktijknaam"
@@ -187,7 +180,6 @@ const Register = () => {
         onChange={handleChange}
         required
       />
-
       <button type="submit" disabled={isLoading}>
         {isLoading ? "Bezig met registreren..." : "Registreer"}
       </button>

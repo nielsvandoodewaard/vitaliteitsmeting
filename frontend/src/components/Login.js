@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import api, { setAuthToken } from "../utils/axiosConfig"; // Zorg ervoor dat het pad klopt
+import { supabase } from "../utils/supabaseClient"; // Zorg ervoor dat het pad klopt
 import "../styles/Login.css"; // Importeer de CSS
 
 // Het logo importeren
@@ -15,9 +15,8 @@ const Login = () => {
 
   useEffect(() => {
     // Controleer of er al een geldig JWT-token is bij het laden van de pagina
-    const token = localStorage.getItem("jwt");
+    const token = localStorage.getItem("supabase_token");
     if (token) {
-      setAuthToken(token);
       navigate("/UserDashboard"); // Als er een token is, stuur de gebruiker naar het dashboard
     }
   }, [navigate]);
@@ -26,7 +25,7 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true); // Zet de laadindicator aan
 
-    // Zorg ervoor dat het emailadres een geldig formaat heeft
+    // Controleer of zowel email als wachtwoord zijn ingevuld
     if (!email || !password) {
       setMessage("Vul zowel email als wachtwoord in.");
       setIsLoading(false);
@@ -34,23 +33,29 @@ const Login = () => {
     }
 
     try {
-      const response = await api.post("api/auth/local", {
-        identifier: email,
-        password: password,
+      // Authenticeren met Supabase
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
       });
-      const { jwt, user } = response.data;
 
-      // Sla de JWT op in localStorage
-      localStorage.setItem("jwt", jwt);
-      setAuthToken(jwt);
+      if (error) {
+        throw error;
+      }
 
-      setMessage(`Welkom ${user.username}!`);
+      const { session, user } = data;
+
+      // Sla de token en gebruiker op in localStorage
+      localStorage.setItem("supabase_token", session.access_token);
+      localStorage.setItem("supabase_user", JSON.stringify(user));
+
+      setMessage(`Welkom ${user.email}!`);
 
       // Redirect naar het dashboard
       navigate("/dashboard");
     } catch (err) {
       setMessage("Inloggen mislukt. Controleer je gegevens.");
-      console.error(err); // Print de error voor debugging
+      console.error("Login error:", err);
     } finally {
       setIsLoading(false); // Zet de laadindicator uit
     }
