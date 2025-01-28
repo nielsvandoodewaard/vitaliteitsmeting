@@ -3,18 +3,25 @@ import UserSidebar from './UserSidebar';
 import '../styles/UserDashboard.css';
 
 const UserDashboard = () => {
-  const formUrl = 'https://form.jotform.com/250063902679359'; // Je formulier-URL
+  const formUrl = 'https://www.survio.com/survey/d/C4V2W3P1W6F6I9S1L'; // Correcte formulier-URL
 
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = `https://form.jotform.com/jsform/250063902679359`;
-    script.async = true;
-    document.getElementById('form-container').appendChild(script);
+    // Controleer of het script al is toegevoegd
+    if (!document.getElementById('survio-script')) {
+      const script = document.createElement('script');
+      script.src = formUrl;
+      script.id = 'survio-script'; // Unieke ID om duplicaten te vermijden
+      script.async = true;
+      document.getElementById('form-container').appendChild(script);
 
-    return () => {
-      document.getElementById('form-container').removeChild(script);
-    };
-  }, []);
+      return () => {
+        const existingScript = document.getElementById('survio-script');
+        if (existingScript) {
+          document.getElementById('form-container').removeChild(existingScript);
+        }
+      };
+    }
+  }, [formUrl]); // Zorg ervoor dat het script alleen opnieuw geladen wordt als de URL verandert
 
   return (
     <div className="user-dashboard">
